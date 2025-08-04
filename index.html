@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massage Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3efe0;
+            color: #5a5a5a;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #a67b5b;
+            padding: 20px;
+            color: white;
+        }
+        .banner {
+            background-color: #d4c2a8;
+            padding: 15px;
+            margin: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .therapist-list {
+            margin: 20px;
+        }
+        .search-bar {
+            margin: 20px auto;
+            max-width: 400px;
+            display: flex;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #a67b5b;
+            border-radius: 5px 0 0 5px;
+        }
+        .search-bar button {
+            padding: 10px;
+            background: #a67b5b;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .therapists {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .therapist-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 200px;
+        }
+        .therapist-card img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+        .btn {
+            display: inline-block;
+            background: #a67b5b;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #8b6747;
+        }
+        footer {
+            background-color: #a67b5b;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Massage Directory</h1>
+    </header>
+    
+    <!-- Top Banner Space -->
+    <div class="banner top-banner">Your Ad Here</div>
+    
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search therapists...">
+        <button onclick="searchTherapists()">Search</button>
+    </div>
+    
+    <main>
+        <section class="therapist-list">
+            <h2>Find a Massage Therapist</h2>
+            <div class="therapists" id="therapistContainer">
+                <?php 
+                    $therapists = [
+                        ['name' => 'John Doe', 'specialty' => 'Deep Tissue', 'image' => 'placeholder.jpg'],
+                        ['name' => 'Jane Smith', 'specialty' => 'Swedish Massage', 'image' => 'placeholder.jpg']
+                    ];
+                    foreach ($therapists as $therapist) {
+                        echo "<div class='therapist-card' data-name='{$therapist['name']}'>
+                                <img src='{$therapist['image']}' alt='{$therapist['name']}'>
+                                <h3>{$therapist['name']}</h3>
+                                <p>Specialty: {$therapist['specialty']}</p>
+                                <a href='listing.php' class='btn'>View Profile</a>
+                              </div>";
+                    }
+                ?>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bottom Banner Space -->
+    <div class="banner bottom-banner">Your Ad Here</div>
+    
+    <footer>
+        
+    </footer>
+    
+    <script>
+        function searchTherapists() {
+            var input = document.getElementById("search").value.toLowerCase();
+            var cards = document.querySelectorAll(".therapist-card");
+            
+            cards.forEach(card => {
+                var name = card.getAttribute("data-name").toLowerCase();
+                if (name.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
